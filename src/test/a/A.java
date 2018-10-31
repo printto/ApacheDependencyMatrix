@@ -1,7 +1,6 @@
 package test.a;
 
-import test.b.Bi;
+import test.b.Ba;
 
-public class A implements Bi {
-
+public class A extends Ba {
 }
