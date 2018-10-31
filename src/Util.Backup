@@ -1,0 +1,83 @@
+import java.io.File;
+
+public class UtilBU {
+
+    final static String PACKAGE_NAME = "aggregators";
+    final static String PATH = "/Users/printto/Desktop/giraph/giraph-core/src/main/java/org/apache/giraph/";
+
+    public static void main(String[] args) {
+
+        PackageInfo info = new PackageInfo();
+        info.packageName = UtilBU.PACKAGE_NAME;
+        String path = UtilBU.PATH;
+
+        File jcdFile = new File(path+info.packageName);
+        String[] jcdFiles = jcdFile.list();
+        Counter read = new Counter();
+        System.out.println("\nLocation: "+path);
+        System.out.println("Package name: "+info.packageName);
+        System.out.println("Files Found: "+jcdFiles.length);
+        for(String myFile : jcdFiles)
+        {
+            if(myFile.endsWith(".java")){
+                read.count(jcdFile.getPath()+"/"+myFile, info);
+            }
+            else if(!myFile.contains(".")){
+                UtilBU.recur(jcdFile.getPath(), myFile, info);
+            }
+        }
+
+        File jcdFileCa = new File(path);
+        String[] jcdFilesCa = jcdFileCa.list();
+        for(String myFile : jcdFilesCa){
+            if(myFile.endsWith(".java")){
+                read.countCa(jcdFileCa.getPath()+"/"+myFile, info, -1);
+            }
+            else if(myFile.equals(info.packageName)){
+
+            }
+            else if(!myFile.contains(".")){
+                recurCa(jcdFileCa.getPath(), myFile, info, -1);
+            }
+        }
+        System.out.println("Ca = "+info.ca);
+        System.out.println("Ce = "+info.ce);
+        System.out.println("Na = "+info.na);
+        System.out.println("Nc = "+info.nc);
+        System.out.println("A  = "+info.getAbstactness());
+        System.out.println("I  = "+info.getInstability());
+
+    }
+
+    public static void recur(String path, String folder, PackageInfo info){
+        String newPath = path+"/"+folder;
+        File jcdFile = new File(newPath);
+        String[] jcdFiles = jcdFile.list();
+        Counter read = new Counter();
+        for(String myFile : jcdFiles) {
+            if (myFile.endsWith(".java")) {
+                read.count(jcdFile.getPath() + "/" + myFile, info);
+            } else if (!myFile.contains(".")) {
+                recur(jcdFile.getPath(), myFile, info);
+            }
+        }
+    }
+
+    public static void recurCa(String path, String folder,PackageInfo info, int recurLevel){
+        recurLevel++;
+        String newPath = path+"/"+folder;
+        File jcdFile = new File(newPath);
+        String[] jcdFiles = jcdFile.list();
+        Counter read = new Counter();
+        for(String myFile : jcdFiles)
+        {
+            if(myFile.endsWith(".java")){
+                read.countCa(jcdFile.getPath()+"/"+myFile, info, recurLevel);
+            }
+            else if(!myFile.contains(".")){
+                recurCa(jcdFile.getPath(), myFile, info, recurLevel);
+            }
+        }
+    }
+
+}

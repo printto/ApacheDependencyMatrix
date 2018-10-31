@@ -56,7 +56,7 @@ public class Counter {
                 if (eachLine.contains("import "))    {
                     String[] temp = eachLine.split(" ");
                     String packageName = info.packageName.replace('/','.');
-                    if(!temp[1].startsWith(packageName)){
+                    if(!temp[1].contains(packageName)){
                         info.ce++;
                     }
                     break;
