@@ -1,5 +1,6 @@
 # WSP 2018 Assignment - PackageDependencyMetrics
-#### by Pappim Pipatkasrira
+#### Pappim Pipatkasrira 5910545787
+#### Phanuwatch Luangpradit 5910545779
 
 ![alt text](https://raw.githubusercontent.com/printto/ApacheDependencyMatrix/master/graph.png)
 
