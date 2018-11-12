@@ -1,6 +1,7 @@
 # WSP 2018 Assignment - PackageDependencyMetrics
-#### Pappim Pipatkasrira 5910545787
-#### Phanuwatch Luangpradit 5910545779
+### Group members
+Pappim Pipatkasrira 5910545787
+Phanuwatch Luangpradit 5910545779
 
 
 ## Assignment documentation
